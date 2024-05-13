@@ -51,7 +51,17 @@ class GestionnaireBonSortie {
       print("L'index spécifié est invalide.");
     }
   }
-  
+    // Recherche d'un bon de sortie par identifiant
+  Bon_Sortie? rechercherBonSortieParId(int bon_sortie_id) {
+    var bon = bonsSortie.firstWhere(
+      (bon) => bon.bon_sortie_id == bon_sortie_id,
+      orElse: () {
+        print("Aucun bon de sortie trouvé pour l'identifiant spécifié.");
+        return Bon_Sortie(0, '', DateTime.now(), 0); // Ou une autre valeur par défaut
+      },
+    );
+    return bon;
+  }
 
   // Recherche de bons de sortie par date
   List<Bon_Sortie> rechercherBonsSortieParDate(DateTime date) {
