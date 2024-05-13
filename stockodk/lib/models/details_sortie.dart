@@ -58,14 +58,4 @@ class GestionDetailsSortie {
   }
 }
 
-/*
-void main() {
-  var gestion = GestionDetailsSortie();
-  gestion.ajouterDetailSortie(5, 1500.0, null, 1, 1);
-  print(gestion.listerDetailsSortie());
-  gestion.modifierDetailSortie(1, quantite: 10, prixTotal: 3000.0);
-  print(gestion.listerDetailsSortie());
-  gestion.supprimerDetailSortie(1);
-  print(gestion.listerDetailsSortie());
-}
-*/
+ 
