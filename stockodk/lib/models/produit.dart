@@ -36,7 +36,7 @@ class Produit {
     return _produits.where((produit) => produit.nom_produit.toLowerCase().contains(nom_produit.toLowerCase())).toList();
   }
 
-// Methode de recherche par id
+// Methode de recherche par description
   static List<Produit> searchByDescription(String description) {
     return _produits.where((produit) => produit.description.toLowerCase().contains(description.toLowerCase())).toList();
   }
