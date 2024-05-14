@@ -1,31 +1,53 @@
-class BonEntree {
-  // Déclaration des différentes attributs
-  int bonEntreeId = 0;
-  String dateDeCommande = "";
-  String statut = "";
-  int idUtilisateur = 0;
-  int idFournisseur = 0;
+class BonEntree 
+{
+  int bonEntreeId;
+  String dateDeCommande;
+  String statut;
+  int idUtilisateur;
+  int idFournisseur;
 
-  // Initialisation du bon d'entrée (Création du bon d'entrée)
-  BonEntree(this.bonEntreeId, this.dateDeCommande, this.statut, this.idUtilisateur, this.idFournisseur);
+  // Liste pour stocker les bons d'entrée
+    static List<BonEntree> bonsEntree = [];
 
-  // Méthode pour modifier les détails du bon d'entrée
-  void modifierBonEntree(int bonEntreeId, String dateDeCommande, String statut, int idUtilisateur, int idFournisseur) {
-    this.bonEntreeId = bonEntreeId;
-    this.dateDeCommande = dateDeCommande;
-    this.statut = statut;
-    this.idUtilisateur = idUtilisateur;
-    this.idFournisseur = idFournisseur;
-  }
+  // Constructeur de la classe
+    BonEntree(this.bonEntreeId, this.dateDeCommande, this.statut, this.idUtilisateur, this.idFournisseur);
 
-// Méthode pour obtenir les attributs sous forme de liste
-  List<dynamic> liste() {
-    return [bonEntreeId, dateDeCommande, statut, idUtilisateur, idFournisseur];
-  }
-  
-   @override
-  String toString() {
-    return 'BonEntree {Id: $bonEntreeId, Date: $dateDeCommande, Statut: $statut, IdUtilisateur: $idUtilisateur, iDFournisseur: $idFournisseur}';
-  
+  // Méthode pour ajouter un bon d'entrée à la liste
+    void ajouterBonEntree() 
+    {
+      bonsEntree.add(this);
+    }
+
+  // Méthode pour afficher tous les bons d'entrée
+    static void afficherBonsEntree()
+    {
+      for (var bon in bonsEntree)
+      {
+        print("Bon d'entrée ID : ${bon.bonEntreeId}");
+        print("Date de commande : ${bon.dateDeCommande}");
+        print("Statut : ${bon.statut}");
+        print("ID utilisateur : ${bon.idUtilisateur}");
+        print("ID fournisseur : ${bon.idFournisseur}");
+        print('---');
+      }
+    }
+  // Méthode de recherche de bon d'entrée par son Id
+   static void rechercherBonEntreeParId(int id) 
+    {
+      for (var bon in bonsEntree) 
+      {
+        if (bon.bonEntreeId == id)
+        {
+          print("Bon d'entrée trouvé :");
+          print("Bon d'entrée ID : ${bon.bonEntreeId}");
+          print("Date de commande : ${bon.dateDeCommande}");
+          print("Statut : ${bon.statut}");
+          print("ID utilisateur : ${bon.idUtilisateur}");
+          print("ID fournisseur : ${bon.idFournisseur}");
+        }
+      }
+    
+    }
+ 
 }
-}
+
