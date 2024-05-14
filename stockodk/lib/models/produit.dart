@@ -21,19 +21,22 @@ class Produit {
     print('ID: $produit_id, Nom: $nom_produit, Prix: $prix, Quantité: $quantite_en_stock');
   }
 
+// Methode de recherche par id
   static Produit? searchById(int produit_id) {
+    Produit? produit;
     try {
-      return _produits.firstWhere((p) => p.produit_id == produit_id);
+      produit = _produits.firstWhere((p) => p.produit_id == produit_id);
     } catch (e) {
       print("Aucun produit trouvé par identifiant $produit_id");
-      return null;
     }
+    return produit;
   }
-
+// Methode de recherche par NOM 
   static List<Produit> searchByName(String nom_produit) {
     return _produits.where((produit) => produit.nom_produit.toLowerCase().contains(nom_produit.toLowerCase())).toList();
   }
 
+// Methode de recherche par description
   static List<Produit> searchByDescription(String description) {
     return _produits.where((produit) => produit.description.toLowerCase().contains(description.toLowerCase())).toList();
   }
@@ -67,23 +70,25 @@ class Produit {
   static void supprimerProduit(int produit_id) {
     _produits.removeWhere((produit) => produit.produit_id == produit_id);
   }
-}
 
-void initialiserProduits() {
-  if (Produit.produits.isEmpty) {
-    Produit.ajouterProduit(Produit(1, "Ordinateur portable", "Ordinateur portable avec écran tactile.", 999.99, 10));
-    Produit.ajouterProduit(Produit(2, "Souris sans fil", "Souris ergonomique avec technologie sans fil.", 29.99, 20));
-    Produit.ajouterProduit(Produit(3, "Clavier mécanique", "Clavier rétroéclairé avec switches mécaniques.", 149.99, 5));
+  // Méthode pour initialiser les produits
+  static void initialiserProduits() {
+    if (_produits.isEmpty) {
+      ajouterProduit(Produit(1, "Ordinateur portable", "Ordinateur portable avec écran tactile.", 999.99, 10));
+      ajouterProduit(Produit(2, "Souris sans fil", "Souris ergonomique avec technologie sans fil.", 29.99, 20));
+      ajouterProduit(Produit(3, "Clavier mécanique", "Clavier rétroéclairé avec switches mécaniques.", 149.99, 5));
 
-    Produit.ajouterProduit(Produit(4, "Écouteurs Bluetooth", "Écouteurs sans fil avec suppression de bruit.", 79.99, 15));
-    Produit.ajouterProduit(Produit(5, "Disque dur externe", "Disque dur externe portable de 1 To.", 79.99, 8));
-    Produit.ajouterProduit(Produit(6, "Imprimante laser", "Imprimante laser monochrome avec Wi-Fi.", 199.99, 3));
+      ajouterProduit(Produit(4, "Écouteurs Bluetooth", "Écouteurs sans fil avec suppression de bruit.", 79.99, 15));
+      ajouterProduit(Produit(5, "Disque dur externe", "Disque dur externe portable de 1 To.", 79.99, 8));
+      ajouterProduit(Produit(6, "Imprimante laser", "Imprimante laser monochrome avec Wi-Fi.", 199.99, 3));
+    }
   }
 }
 
-/*
+
+
 void main() {
-  initialiserProduits();
+  Produit.initialiserProduits();
 
   Produit.modifierProduit(2, nom_produit: "Souris optique", description: "Souris sans fil avec capteur optique.");
   Produit.supprimerProduit(1);
@@ -113,6 +118,3 @@ void main() {
     print("Produit non trouvé.");
   }
 }
-
-
-*/
