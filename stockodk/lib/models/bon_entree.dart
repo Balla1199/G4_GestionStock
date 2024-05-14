@@ -18,4 +18,14 @@ class BonEntree {
     this.idFournisseur = idFournisseur;
   }
 
+// Méthode pour obtenir les attributs sous forme de liste
+  List<dynamic> liste() {
+    return [bonEntreeId, dateDeCommande, statut, idUtilisateur, idFournisseur];
+  }
+  
+   @override
+  String toString() {
+    return 'BonEntree {Id: $bonEntreeId, Date: $dateDeCommande, Statut: $statut, IdUtilisateur: $idUtilisateur, iDFournisseur: $idFournisseur}';
+  
+}
 }
