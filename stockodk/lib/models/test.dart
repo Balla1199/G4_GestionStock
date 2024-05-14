@@ -181,3 +181,15 @@
 //   } else {
 //     print("Produit non trouvé.");
 //   }
+
+  //     print("*************** Ici nous avons les utilisateurs *****************");
+
+    // Utilisateur utilisateur1 = Utilisateur(1, "Badra Aliou SY", "sybadraaliou@gmail.com", "Aliou", "motdepasse123", Role.vendeur);
+    // Utilisateur utilisateur2 = Utilisateur(2, "Moussa Goita", "moussa@gmail.com", "moussa", "password", Role.manager);
+    // print(utilisateur2.nomUtilisateur);
+
+
+ //     print("*************** Ici nous avons les bonEntre *****************");
+
+    //     BonEntree.ajouterBonEntree(1, "22-05-2025", "nn", 1, 1);
+    // BonEntree.afficherBonsEntree();

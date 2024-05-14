@@ -8,9 +8,7 @@ import 'package:stockodk/models/produit.dart';
 import 'package:stockodk/models/utilisateur.dart';
 void main (){ 
   try {
-    Utilisateur utilisateur1 = Utilisateur(1, "Badra Aliou SY", "sybadraaliou@gmail.com", "Aliou", "motdepasse123", Role.vendeur);
-    Utilisateur utilisateur2 = Utilisateur(2, "Moussa Goita", "moussa@gmail.com", "moussa", "password", Role.manager);
-    print(utilisateur2.nomUtilisateur);
+
   } catch (e) {
     print(e);
     
