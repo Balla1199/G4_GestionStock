@@ -87,7 +87,7 @@ class Produit {
 
 
 
-void main() {
+/*void main() {
   Produit.initialiserProduits();
 
   Produit.modifierProduit(2, nom_produit: "Souris optique", description: "Souris sans fil avec capteur optique.");
@@ -118,3 +118,5 @@ void main() {
     print("Produit non trouvé.");
   }
 }
+
+*/
