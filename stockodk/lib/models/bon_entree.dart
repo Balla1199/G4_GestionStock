@@ -1,21 +1,50 @@
-class BonEntree {
-  // Déclaration des différentes attributs
-  int bonEntreeId = 0;
-  String dateDeCommande = "";
-  String statut = "";
-  int idUtilisateur = 0;
-  int idFournisseur = 0;
+class BonEntree 
+{
+  int bonEntreeId;
+  String dateDeCommande;
+  String statut;
+  int idUtilisateur;
+  int idFournisseur;
 
-  // Initialisation du bon d'entrée (Création du bon d'entrée)
-  BonEntree(this.bonEntreeId, this.dateDeCommande, this.statut, this.idUtilisateur, this.idFournisseur);
+  // // Liste pour stocker les bons d'entrée
+  //   static List<BonEntree> bonsEntree = [];
 
-  // Méthode pour modifier les détails du bon d'entrée
-  void modifierBonEntree(int bonEntreeId, String dateDeCommande, String statut, int idUtilisateur, int idFournisseur) {
-    this.bonEntreeId = bonEntreeId;
-    this.dateDeCommande = dateDeCommande;
-    this.statut = statut;
-    this.idUtilisateur = idUtilisateur;
-    this.idFournisseur = idFournisseur;
-  }
+  // Constructeur de la classe
+    BonEntree(this.bonEntreeId, this.dateDeCommande, this.statut, this.idUtilisateur, this.idFournisseur);
+    static List<BonEntree> bon_entree = [];
 
+  // Méthode pour ajouter un bon d'entrée à la liste
+    static void ajouterBonEntree(bonEntreeId, dateDeCommande, statut, idUtilisateur, idFournisseur) 
+    {
+      bon_entree.add(BonEntree(bonEntreeId, dateDeCommande, statut, idUtilisateur, idFournisseur));
+      print("ajout effectuer avec succes");
+    }
+
+  // Méthode pour afficher tous les bons d'entrée
+    static void afficherBonsEntree()
+    {
+      for (var bon in bon_entree)
+      {
+        print("Bon d'entrée ID : ${bon.bonEntreeId}, Date de commande : ${bon.dateDeCommande}, Statut : ${bon.statut}, ID utilisateur : ${bon.idUtilisateur},ID fournisseur : ${bon.idFournisseur}");
+      }
+    }
+  // Méthode de recherche de bon d'entrée par son Id
+   static void rechercherBonEntreeParId(int id) 
+    {
+      for (var bon in bon_entree) 
+      {
+        if (bon.bonEntreeId == id)
+        {
+          print("Bon d'entrée trouvé :");
+          print("Bon d'entrée ID : ${bon.bonEntreeId}");
+          print("Date de commande : ${bon.dateDeCommande}");
+          print("Statut : ${bon.statut}");
+          print("ID utilisateur : ${bon.idUtilisateur}");
+          print("ID fournisseur : ${bon.idFournisseur}");
+        }
+      }
+    
+    }
+ 
 }
+
