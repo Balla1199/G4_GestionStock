@@ -19,8 +19,7 @@ class GestionFournisseurs {
 
   void ajouterFournisseur(Fournisseur nouveauFournisseur) {
     fournisseurs.add(nouveauFournisseur);
-    print(
-        'Nouveau fournisseur : ${nouveauFournisseur.nom}, ${nouveauFournisseur.adresse}, ${nouveauFournisseur.telephone}');
+    
   }
 
   //aficher

@@ -9,6 +9,29 @@ class Utilisateur {
   Role role;
 
   Utilisateur(this.utilisateurId, this.nomUtilisateur, this.contact, this.pseudo, this.motDePasse, this.role);
+
+  @override
+  String toString() {
+    return 'Utilisateur{utilisateurId: $utilisateurId, nomUtilisateur: $nomUtilisateur, contact: $contact, pseudo: $pseudo, role: $role}';
+  }
+}
+
+// Classe Vendeur héritant de Utilisateur
+class Vendeur extends Utilisateur {
+  Vendeur(int utilisateurId, String nomUtilisateur, String contact, String pseudo, String motDePasse)
+      : super(utilisateurId, nomUtilisateur, contact, pseudo, motDePasse, Role.vendeur);
+}
+
+// Classe Manager héritant de Utilisateur
+class Manager extends Utilisateur {
+  Manager(int utilisateurId, String nomUtilisateur, String contact, String pseudo, String motDePasse)
+      : super(utilisateurId, nomUtilisateur, contact, pseudo, motDePasse, Role.manager);
+}
+
+// Classe Administrateur héritant de Utilisateur
+class Administrateur extends Utilisateur {
+  Administrateur(int utilisateurId, String nomUtilisateur, String contact, String pseudo, String motDePasse)
+      : super(utilisateurId, nomUtilisateur, contact, pseudo, motDePasse, Role.administrateur);
 }
 
 class GestionUtilisateurs {
@@ -41,6 +64,12 @@ class GestionUtilisateurs {
   static Utilisateur? rechercherParLogin(String login) {
     return utilisateurs.firstWhere((element) => element.pseudo.toLowerCase() == login.toLowerCase(), orElse: () => Utilisateur(-1, "", "", "", "", Role.vendeur));
   }
+
+  static void afficherUtilisateurs() {
+    for (var utilisateur in utilisateurs) {
+      print(utilisateur.nomUtilisateur);
+    }
+  }
 }
 
 void main() {
@@ -62,6 +91,9 @@ void main() {
 
   print(GestionUtilisateurs.rechercherParNom("Aliou"));
   print(GestionUtilisateurs.rechercherParLogin("moussa"));
-}
+  Utilisateur utilisateur3 = Utilisateur(3, "Balla Coulibaly", "balla@gmail.com", "balla", "password", Role.administrateur);
+  print(utilisateur3.nomUtilisateur);
 
-  
+  // Appel de la fonction pour afficher la liste de tous les utilisateurs
+  GestionUtilisateurs.afficherUtilisateurs();
+}
