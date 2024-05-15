@@ -1,5 +1,6 @@
 
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:stockodk/models/bon_entree.dart';
 import 'package:stockodk/models/bon_sortie.dart';
@@ -9,13 +10,86 @@ import 'package:stockodk/models/fournisseur.dart';
 import 'package:stockodk/models/produit.dart';
 import 'package:stockodk/models/utilisateur.dart';
 void main (){ 
-  try {
     
+    Utilisateur utilisateur1 = Utilisateur(1, "Badra Aliou SY", "sybadraaliou@gmail.com", "Aliou", "motdepasse123", Role.administrateur);
+    Utilisateur utilisateur2 = Utilisateur(2, "Atou Carter", "atou@gmail.com", "atou", "password", Role.manager);
+    Utilisateur utilisateur3 = Utilisateur(3, "Moussa Goita", "moussa@gmail.com", "moussa", "password", Role.vendeur);
+
+    Produit.ajouterProduit(Produit(1, "14 pro max", "512go", 34.78, 34));
+    Produit.ajouterProduit(Produit(2, "Stylo", "Red", 20, 4));
+    Produit.ajouterProduit(Produit(3, "Oridnateur Dell", "Hp", 78, 12));
+
+    void choixuser(){
+      print("Veuillez choisir votre tâche à faire :");
+      print("1 : Afficher les informations");      
+      print("2 : Ajouter un produit");
+      print("3 : Modifier un produit");
+      print("4 : Supprimer un produit");
+      print("5 : Rechercher un produit");
+      print("6 : Ajouter un fournisseur");
+      print("7 : Modifier un fournisseur");
+      print("8 : Supprimer un fournisseur");
+      print("9 : Rechercher un fournisseur");
+      print("10 : Ajouter un bon d'entrée");
+      print("11 : Modifier un bon d'entrée");
+      print("12 : Supprimer un bon d'entrée");
+      print("13 : Rechercher un bon d'entrée");
+    }
+
+    print("Veuillez entrer votre login :");
+    String login = stdin.readLineSync() ?? "";
+    print("Veuillez entrer votre mot de passe:");
+    String password = stdin.readLineSync() ?? "";
+    
+    if(login == '' || password == ''){
+      print("Idendifiants incorrects !");
+      return;
+    }
+    else if (login == 'moussa' && password == 'password'){
+      print("Bienvenue Vendeurni! Vous pouvez voir la liste des produits.");
+      Produit.afficherTousProduit();
+    }
+
+    else if (login == 'atou' && password == 'password'){
+      print("Bienvenue Manager! ");
+      choixuser();
+      String choix = stdin.readLineSync() ?? "";
+      switch (choix) {
+        case "1":
+          print("*************** Ici nous avons les informations *****************");
+          Produit.afficherTousProduit();
+          //Fournisseur.afficherTousFournisseurs();
+          //BonEntree.afficherTousBonsEntree();
+          //BonSortie.afficherTousBonsSortie();
+          //DetailsEntree.afficherTousDetailsEntree();
+          //DetailsSortie.afficherTousDetailsSortie();
+          break;
+        case "2":
+          print("*************** Ici nous pouvons ajouter un produit *****************");
+          print("Entrez les informations du produit à ajouter:");
+          print("Nom du produit:");
+          String nomProduit = stdin.readLineSync() ?? "";
+          print("Description du produit:");
+          String descriptionProduit = stdin.readLineSync() ?? "";
+          print("Prix d'achat du produit:");
+          double prixAchat = double.parse(stdin.readLineSync() ?? "0");
+          print("Quantité en stock");
+          int quantiteStock = int.parse(stdin.readLineSync() ?? "0");
+          break;
+      }
+    }
+
+    else if (login == 'Aliou' && password == 'motdepasse123'){
+      print("Bienvenue Admin! ");
+      Produit.afficherTousProduit();
+    }
+
+    else {
+      print("Vous n'avez rien à faire ici !");
+    }
+}
+    /*  try {
     print("*************** Ici nous avons les utilisateurs *****************");
-
-    Utilisateur utilisateur1 = Utilisateur(1, "Badra Aliou SY", "sybadraaliou@gmail.com", "Aliou", "motdepasse123", Role.vendeur);
-    Utilisateur utilisateur2 = Utilisateur(2, "Moussa Goita", "moussa@gmail.com", "moussa", "password", Role.manager); 
-
     print("Liste des Utilisateurs : ");
     print("Nom : ${utilisateur2.nomUtilisateur} - ${utilisateur2.contact} - ${utilisateur2.pseudo} - ${utilisateur2.motDePasse} - ${utilisateur2.role}");
     print("Nom : ${utilisateur1.nomUtilisateur} - ${utilisateur1.contact} - ${utilisateur1.pseudo} - ${utilisateur1.motDePasse} - ${utilisateur1.role}");
@@ -116,3 +190,4 @@ void afficherDetails(DetailsEntree details ){
     print("la quantite: ${details.quant}, le prix total: ${details.prixtotal}, l'id produit: ${details.idprod}, l'id bon entree': ${details.idbonentree}, l'id");
 
   }
+*/
