@@ -4,10 +4,7 @@ class BonEntree
   String dateDeCommande;
   String statut;
   int idUtilisateur;
-  int idFournisseur;
-
-  // // Liste pour stocker les bons d'entrée
-  //   static List<BonEntree> bonsEntree = [];
+  int idFournisseur; 
 
   // Constructeur de la classe
     BonEntree(this.bonEntreeId, this.dateDeCommande, this.statut, this.idUtilisateur, this.idFournisseur);
@@ -17,7 +14,7 @@ class BonEntree
     static void ajouterBonEntree(bonEntreeId, dateDeCommande, statut, idUtilisateur, idFournisseur) 
     {
       bon_entree.add(BonEntree(bonEntreeId, dateDeCommande, statut, idUtilisateur, idFournisseur));
-      print("ajout effectuer avec succes");
+      // print("ajout effectuer avec succes");
     }
 
   // Méthode pour afficher tous les bons d'entrée
@@ -28,6 +25,27 @@ class BonEntree
         print("Bon d'entrée ID : ${bon.bonEntreeId}, Date de commande : ${bon.dateDeCommande}, Statut : ${bon.statut}, ID utilisateur : ${bon.idUtilisateur},ID fournisseur : ${bon.idFournisseur}");
       }
     }
+      // Méthode pour modifier un bon d'éntrée
+   static modifierUnBonEntee (int? bonEntreeId,{
+  String? dateDeCommande,
+  String? statut,
+  int? idUtilisateur,
+  int? idFournisseur})
+  {
+        for (var bon in bon_entree)
+        {
+            if (bon.bonEntreeId == bonEntreeId)
+            {
+              if (dateDeCommande != null) bon.dateDeCommande = dateDeCommande;
+              if (statut != null) bon.statut = statut;
+              if (idFournisseur != null) bon.idFournisseur = idFournisseur;
+              if (idUtilisateur != null) bon.idUtilisateur = idUtilisateur;
+              print("Le bon ${bon.bonEntreeId} a été modofier avec succè");
+            } else{
+              print("Entrer un ID valide !");
+              }
+        }
+  }
   // Méthode de recherche de bon d'entrée par son Id
    static void rechercherBonEntreeParId(int id) 
     {
@@ -36,11 +54,9 @@ class BonEntree
         if (bon.bonEntreeId == id)
         {
           print("Bon d'entrée trouvé :");
-          print("Bon d'entrée ID : ${bon.bonEntreeId}");
-          print("Date de commande : ${bon.dateDeCommande}");
-          print("Statut : ${bon.statut}");
-          print("ID utilisateur : ${bon.idUtilisateur}");
-          print("ID fournisseur : ${bon.idFournisseur}");
+          print("Bon d'entrée ID : ${bon.bonEntreeId} - Date de commande : ${bon.dateDeCommande} - Statut : ${bon.statut} - ID utilisateur : ${bon.idUtilisateur} - ID fournisseur : ${bon.idFournisseur}");
+        }else{
+          print("Ce bon d'entrée n'existe pas");
         }
       }
     
