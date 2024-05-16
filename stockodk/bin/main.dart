@@ -9,198 +9,185 @@ import 'package:stockodk/models/details_sortie.dart';
 import 'package:stockodk/models/fournisseur.dart';
 import 'package:stockodk/models/produit.dart';
 import 'package:stockodk/models/utilisateur.dart';
-
 void main (){ 
     
-  Utilisateur utilisateur1 = Utilisateur(1,  "Badra Aliou SY", "sybadraaliou@gmail.com", "Aliou", "password", Role.administrateur);
-  Utilisateur utilisateur2 = Utilisateur(2, "Atou Carter", "atou@gmail.com", "atou", "password", Role.manager);
-  Utilisateur utilisateur3 = Utilisateur(3, "Moussa Goita", "moussa@gmail.com", "moussa", "password", Role.vendeur);
-  var utilisateurs = [utilisateur1, utilisateur2, utilisateur3];
+    Utilisateur utilisateur1 = Utilisateur(1, "Badra Aliou SY", "sybadraaliou@gmail.com", "Aliou", "motdepasse123", Role.administrateur);
+    Utilisateur utilisateur2 = Utilisateur(2, "Atou Carter", "atou@gmail.com", "atou", "password", Role.manager);
+    Utilisateur utilisateur3 = Utilisateur(3, "Moussa Goita", "moussa@gmail.com", "moussa", "password", Role.vendeur);
 
-  Produit.ajouterProduit(Produit(1, "14 pro max", "512go", 34.78, 34));
-  Produit.ajouterProduit(Produit(2, "Stylo", "Red", 20, 4));
-  Produit.ajouterProduit(Produit(3, "Oridnateur Dell", "Hp", 78, 12));
+    Produit.ajouterProduit(Produit(1, "14 pro max", "512go", 34.78, 34));
+    Produit.ajouterProduit(Produit(2, "Stylo", "Red", 20, 4));
+    Produit.ajouterProduit(Produit(3, "Oridnateur Dell", "Hp", 78, 12));
 
-  var gestionFrs = GestionFournisseurs();
-  gestionFrs.ajouterFournisseur(Fournisseur(fournisseurId: 1, nom: "Balla", adresse: "Bamako", telephone: '2378'));
-  gestionFrs.ajouterFournisseur(Fournisseur(fournisseurId: 2, nom: "Oumar", adresse: "Kayes", telephone: '123'));
+    void choixuser(){
+      print("Veuillez choisir votre tâche à faire :");
+      print("1 : Afficher les informations");      
+      print("2 : Ajouter un produit");
+      print("3 : Modifier un produit");
+      print("4 : Supprimer un produit");
+      print("5 : Rechercher un produit");
+      print("6 : Ajouter un fournisseur");
+      print("7 : Modifier un fournisseur");
+      print("8 : Supprimer un fournisseur");
+      print("9 : Rechercher un fournisseur");
+      print("10 : Ajouter un bon d'entrée");
+      print("11 : Modifier un bon d'entrée");
+      print("12 : Supprimer un bon d'entrée");
+      print("13 : Rechercher un bon d'entrée");
+    }
+
+    print("Veuillez entrer votre login :");
+    String login = stdin.readLineSync() ?? "";
+    print("Veuillez entrer votre mot de passe:");
+    String password = stdin.readLineSync() ?? "";
+    
+    if(login == '' || password == ''){
+      print("Idendifiants incorrects !");
+      return;
+    }
+    else if (login == 'moussa' && password == 'password'){
+      print("Bienvenue Vendeurni! Vous pouvez voir la liste des produits.");
+      Produit.afficherTousProduit();
+    }
+
+    else if (login == 'atou' && password == 'password'){
+      print("Bienvenue Manager! ");
+      choixuser();
+      String choix = stdin.readLineSync() ?? "";
+      switch (choix) {
+        case "1":
+          print("*************** Ici nous avons les informations *****************");
+          Produit.afficherTousProduit();
+          //Fournisseur.afficherTousFournisseurs();
+          //BonEntree.afficherTousBonsEntree();
+          //BonSortie.afficherTousBonsSortie();
+          //DetailsEntree.afficherTousDetailsEntree();
+          //DetailsSortie.afficherTousDetailsSortie();
+          break;
+        case "2":
+          print("*************** Ici nous pouvons ajouter un produit *****************");
+          print("Entrez les informations du produit à ajouter:");
+          print("Nom du produit:");
+          String nomProduit = stdin.readLineSync() ?? "";
+          print("Description du produit:");
+          String descriptionProduit = stdin.readLineSync() ?? "";
+          print("Prix d'achat du produit:");
+          double prixAchat = double.parse(stdin.readLineSync() ?? "0");
+          print("Quantité en stock");
+          int quantiteStock = int.parse(stdin.readLineSync() ?? "0");
+          break;
+      }
+    }
+
+    else if (login == 'Aliou' && password == 'motdepasse123'){
+      print("Bienvenue Admin! ");
+      Produit.afficherTousProduit();
+    }
+
+    else {
+      print("Vous n'avez rien à faire ici !");
+    }
+}
+    /*  try {
+    print("*************** Ici nous avons les utilisateurs *****************");
+    print("Liste des Utilisateurs : ");
+    print("Nom : ${utilisateur2.nomUtilisateur} - ${utilisateur2.contact} - ${utilisateur2.pseudo} - ${utilisateur2.motDePasse} - ${utilisateur2.role}");
+    print("Nom : ${utilisateur1.nomUtilisateur} - ${utilisateur1.contact} - ${utilisateur1.pseudo} - ${utilisateur1.motDePasse} - ${utilisateur1.role}");
+    
+    print("*************** Ici nous avons les Fournisseurs *****************");
+    
+    var gestionFrs = GestionFournisseurs();
+
+    gestionFrs.ajouterFournisseur(Fournisseur(
+      fournisseurId: 1, nom: "Balla", adresse: "Bamako", telephone: '2378'));
+      gestionFrs.ajouterFournisseur(Fournisseur(
+      fournisseurId: 2, nom: "Oumar", adresse: "Kayes", telephone: '123'));
+
+    print("Liste des Fournisseurs : ");
+    gestionFrs.afficherFournisseur();
+    
+    
+    print("*************** Ici nous avons les produits *****************");
+    
+    Produit.ajouterProduit(Produit(1, "14 pro max", "512go", 34.78, 34));
+    Produit.ajouterProduit(Produit(2, "Stylo", "Red", 20, 4));
+    Produit.ajouterProduit(Produit(3, "Oridnateur Dell", "Hp", 78, 12));
+    Produit.afficherTousProduit();
+    print("Aprés suppression du produit n° 1");
+    Produit.supprimerProduit(1);
+    Produit.afficherTousProduit();
+
+    print("Recherche du produit n°2");
+    Produit? produitById = Produit.searchById(2);
+    if (produitById != null) {
+      print("Produit trouvé par identifiant: ${produitById.nom_produit}");
+      } else {
+        print("Aucun produit trouvé par identifiant");
+        }
+        
+        List<Produit> produitsByName = Produit.searchByName("Bazin");
+        if (produitsByName.isNotEmpty) {
+          print("Produits trouvés par son nom:");
+          produitsByName.forEach((product) => print("ID: ${product.produit_id}, Nom: ${product.nom_produit}, Description: ${product.description}, Prix: ${product.prix}, Quantité en stock: ${product.quantite_en_stock}"));
+          } else {
+            print("Aucun produit trouvé par nom");
+            }
+            Produit? produitConsultation = Produit.searchById(2);
+            if (produitConsultation != null) {
+              produitConsultation.consultationStock();
+              } else {
+                print("Produit non trouvé.");
+                }
+
+  print("*************** Ici nous avons les BonEntres *****************");
 
   BonEntree.ajouterBonEntree(1, "22-05-2020", "Livré", 1, 1);
   BonEntree.ajouterBonEntree(2, "22-03-2023", "Encours", 1, 2);
   BonEntree.ajouterBonEntree(3, "12-05-2024", "Encours", 1, 2);
+  BonEntree.afficherBonsEntree();
 
+  BonEntree.rechercherBonEntreeParId(2);
+  
+  print("*************** Ici nous avons les details du bon d'entre *****************");
+  
   DetailsEntree firstEntre = DetailsEntree(1, 10, 34.78, 2, 1);
   DetailsEntree firstEntre1 = DetailsEntree(2, 13, 78, 2, 1);
   DetailsEntree firstEntre2 = DetailsEntree(3, 4, 50.5, 1, 2);
-  var detailsEntrees = [firstEntre, firstEntre1, firstEntre2];
+  afficherDetails(firstEntre);
+  afficherDetails(firstEntre1);
+  afficherDetails(firstEntre2);
+  print("Modification du bon n°1"); 
+  DetailsEntree detailsModifie= DetailsEntree(1, 10, 34.78, 1, 1); 
+  //Modification details entree
+  detailsModifie.modifierDetailsEntree(detailsModifie);
+  print("Detail entrée modifiée");
+  afficherDetails(detailsModifie); 
 
-  var gestionnaire = Bon_Sortie(0, "", DateTime.now(), 0);
+  //suppression de details entree
+  firstEntre.supprimerDetailsEntree(1);
+  print("\nDétail d'entree supprimée");
+
+  print("*************** Ici nous avons les Bon Sorties *****************");
+  
+  var gestionnaire = Bon_Sortie(0,"", DateTime.now(), 0);
   gestionnaire.creerBonSortie(1, "Achat de fournitures de bureau", DateTime(2024, 5, 10), 1);
-  gestionnaire.creerBonSortie(2, "Achat d'équipement informatique", DateTime(2024, 5, 15), 2);
-
+  gestionnaire.creerBonSortie(2, "Achat d'équipement informatique", DateTime(2024, 5, 15), 2); 
+  gestionnaire.afficherBonsSortie();
+    
+  print("*************** Ici nous avons les details sortiies *****************"); 
   var gestion = GestionDetailsSortie();
   gestion.ajouterDetailSortie(5, 1500.0, null, 1, 1);
-  gestion.ajouterDetailSortie(5, 1500.0, null, 1, 1);
-  gestion.ajouterDetailSortie(5, 1500.0, null, 2, 2);
-
-  print("Veuillez entrer votre login :");
-  String login = stdin.readLineSync() ?? "";
-  print("Veuillez entrer votre mot de passe:");
-  String password = stdin.readLineSync() ?? "";
-
-  var utilisateurConnecte = utilisateurs.firstWhere((user) => user.pseudo == login && user.motDePasse == password);
-  
-  void afficherlist(){
-    Produit.afficherTousProduit();
-    gestionFrs.afficherFournisseur();
-    BonEntree.afficherBonsEntree();
-    gestionnaire.afficherBonsSortie();
-    print(detailsEntrees);
-    gestion.listerDetailsSortie();
-  }
-  
-  void admin() {
-    void choixuser(){
-      print("Veuillez choisir votre tâche à faire :");
-      print("1: Afficher les informations");      
-      print("2: Ajouter un détail sortie");
-      print("3: Modifier un détail sortie");
-      print("4: Supprimer un détail sortie");
-      print("5: Rechercher un détail de sortie par ID");
-      print("6: Rechercher des détails de sortie par date d'expiration");
-      print("7: Quitter");
-    }
- 
-    while(true){
-      choixuser();
-      print("***********************************");
-      String choix = stdin.readLineSync() ?? "";
-
-      switch(choix) {
-        case "1":
-          afficherlist();
-          continue;
-        case "2":
-          ajouterDetailSortie(gestion);
-          continue;
-        case "3":
-          modifierDetailSortie(gestion);
-          continue;
-        case "4":
-          supprimerDetailSortie(gestion);
-          continue;
-        case "5":
-          rechercherDetailParId(gestion);
-          continue;
-        case "6":
-          rechercherDetailsParDateExpiration(gestion);
-          continue;
-        case "7":
-          return;
-        default: print('Option non valide. Veuillez choisir une option valide.');
-      }
-    }
-  }
-
-  void manager () {
-    print("Manager puissant !!!! ");
-
-  }
-
-  switch (utilisateurConnecte.role) {
-    case Role.administrateur:
-      print("Bienvenue Administrateur");
-      admin();
-      break;
-
-    case Role.manager:
-      print("Bienvenue Manager !");
-      manager();
-      break;
-          
-    case Role.vendeur:
-      print("Bienvenue Vendeur !");
-      Produit.afficherTousProduit();
-      break;
-
-    default: print("Vous n'avez rien à ajouter");  
-  }
-
-
-}
-
-void ajouterDetailSortie(GestionDetailsSortie gestion) {
-  try {
-    print("Entrez la quantité:");
-    int quantite = int.parse(stdin.readLineSync() ?? '0');
-
-    print("Entrez le prix total:");
-    double prixTotal = double.parse(stdin.readLineSync() ?? '0');
-
-    print("Entrez l'ID du bon de sortie:");
-    int bonSortieId = int.parse(stdin.readLineSync() ?? '0');
-
-    print("Entrez l'ID du produit:");
-    int produitId = int.parse(stdin.readLineSync() ?? '0');
-
-    print("Entrez la date d'expiration (yyyy-MM-dd), ou appuyez sur Entrée si non applicable:");
-    String? dateInput = stdin.readLineSync();
-    DateTime? dateExpiration = null;
-    if (dateInput != null && dateInput.isNotEmpty) {
-      dateExpiration = DateTime.parse(dateInput);
-    }
-
-    gestion.ajouterDetailSortie(quantite, prixTotal, dateExpiration, bonSortieId, produitId);
-    print("Détail de sortie ajouté avec succès.");
-  } catch (e) {
-    print("Erreur lors de l'ajout du détail de sortie: $e");
-  }
-}
-
-void modifierDetailSortie(GestionDetailsSortie gestion) {
-  print("Entrez l'ID du détail de sortie à modifier:");
-  int id = int.parse(stdin.readLineSync() ?? '0');
-  print("Entrez la nouvelle quantité (appuyez sur Entrée pour ne pas changer):");
-  String? quantiteInput = stdin.readLineSync();
-  int? quantite = quantiteInput?.isEmpty ?? true ? null : int.parse(quantiteInput!);
-  print("Entrez le nouveau prix total (appuyez sur Entrée pour ne pas changer):");
-  String? prixTotalInput = stdin.readLineSync();
-  double? prixTotal = prixTotalInput?.isEmpty ?? true ? null : double.parse(prixTotalInput!);
-
-  gestion.modifierDetailSortie(id, quantite: quantite, prixTotal: prixTotal);
-}
-
-void supprimerDetailSortie(GestionDetailsSortie gestion) {
-  print("Entrez l'ID du détail de sortie à supprimer:");
-  int id = int.parse(stdin.readLineSync() ?? '0');
-  gestion.supprimerDetailSortie(id);
-}
-
-void rechercherDetailParId(GestionDetailsSortie gestion) {
-  print("Entrez l'ID du détail de sortie à rechercher:");
-  int id = int.parse(stdin.readLineSync() ?? '0');
-  try {
-    var detail = gestion.rechercherParId(id);
-    print(detail);
+  gestion.modifierDetailSortie(1, quantite: 10, prixTotal: 3000.0);
+  print(gestion.listerDetailsSortie());
+  gestion.supprimerDetailSortie(1);
+  print(gestion.listerDetailsSortie());
   } catch (e) {
     print(e);
   }
 }
+void afficherDetails(DetailsEntree details ){
+    print("id: ${details.id}");
+    print("la quantite: ${details.quant}, le prix total: ${details.prixtotal}, l'id produit: ${details.idprod}, l'id bon entree': ${details.idbonentree}, l'id");
 
-void rechercherDetailsParDateExpiration(GestionDetailsSortie gestion) {
-    try {
-      print("Entrez la date d'expiration à rechercher (yyyy-MM-dd):");
-      String? dateInput = stdin.readLineSync();
-      DateTime dateRecherche = DateTime.parse(dateInput!);
-      DateTime? dateExpiration = null;
-      if (dateInput != null && dateInput.isNotEmpty) {
-        dateExpiration = DateTime.parse(dateInput);
-      }
-
-      var details = gestion.rechercherParDateExpiration(dateRecherche);
-
-      details.forEach(print);
-  } catch (e) {
-    print("Erreur lors de la recherche du détail de sortie: $e");
-  }  
-}
+  }
+*/
