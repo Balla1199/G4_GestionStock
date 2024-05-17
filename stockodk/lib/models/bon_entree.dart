@@ -3,8 +3,9 @@ class BonEntree
   int bonEntreeId;
   String dateDeCommande;
   String statut;
-  int idUtilisateur;
-  int idFournisseur; 
+  int idUtilisateur; 
+  int idFournisseur;
+ 
 
   // Constructeur de la classe
     BonEntree(this.bonEntreeId, this.dateDeCommande, this.statut, this.idUtilisateur, this.idFournisseur);
@@ -14,7 +15,9 @@ class BonEntree
     static void ajouterBonEntree(bonEntreeId, dateDeCommande, statut, idUtilisateur, idFournisseur) 
     {
       bon_entree.add(BonEntree(bonEntreeId, dateDeCommande, statut, idUtilisateur, idFournisseur));
-      // print("ajout effectuer avec succes");
+ 
+      print("ajout effectuer avec succes");
+ 
     }
 
   // Méthode pour afficher tous les bons d'entrée
@@ -24,8 +27,10 @@ class BonEntree
       {
         print("Bon d'entrée ID : ${bon.bonEntreeId}, Date de commande : ${bon.dateDeCommande}, Statut : ${bon.statut}, ID utilisateur : ${bon.idUtilisateur},ID fournisseur : ${bon.idFournisseur}");
       }
-    }
-      // Méthode pour modifier un bon d'éntrée
+    } 
+
+  // Méthode pour modifier un bon d'éntrée
+ 
    static modifierUnBonEntee (int? bonEntreeId,{
   String? dateDeCommande,
   String? statut,
@@ -47,20 +52,20 @@ class BonEntree
         }
   }
   // Méthode de recherche de bon d'entrée par son Id
-   static void rechercherBonEntreeParId(int id) 
+   static rechercherBonEntreeParId(int id) 
     {
       for (var bon in bon_entree) 
       {
         if (bon.bonEntreeId == id)
         {
           print("Bon d'entrée trouvé :");
+ 
           print("Bon d'entrée ID : ${bon.bonEntreeId} - Date de commande : ${bon.dateDeCommande} - Statut : ${bon.statut} - ID utilisateur : ${bon.idUtilisateur} - ID fournisseur : ${bon.idFournisseur}");
         }else{
           print("Ce bon d'entrée n'existe pas");
-        }
+        } 
       }
     
     }
  
 }
-
