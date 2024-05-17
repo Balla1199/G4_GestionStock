@@ -26,9 +26,11 @@ void main (){
   gestionFrs.ajouterFournisseur(Fournisseur(fournisseurId: 1, nom: "Balla", adresse: "Bamako", telephone: '2378'));
   gestionFrs.ajouterFournisseur(Fournisseur(fournisseurId: 2, nom: "Oumar", adresse: "Kayes", telephone: '123'));
 
-  BonEntree.ajouterBonEntree(1, "22-05-2020", "Livré", 1, 1);
-  BonEntree.ajouterBonEntree(2, "22-03-2023", "Encours", 1, 2);
-  BonEntree.ajouterBonEntree(3, "12-05-2024", "Encours", 1, 2);
+  var gestionBonEntree = GestionBonEntree();
+  // Ajout de quelques bons d'entrée pour démonstration
+  gestionBonEntree.ajouterBonEntree("2024-05-10", "En cours", 1, 1);
+  gestionBonEntree.ajouterBonEntree("2024-05-15", "Terminé", 2, 2);
+  gestionBonEntree.ajouterBonEntree("12-05-2024", "Encours", 1, 2);
 
   DetailsEntree firstEntre = DetailsEntree(1, 10, 34.78, 2, 1);
   DetailsEntree firstEntre1 = DetailsEntree(2, 13, 78, 2, 1);
@@ -55,7 +57,7 @@ void main (){
   void afficherlist(){
     Produit.afficherTousProduit();
     gestionFrs.afficherFournisseur();
-    BonEntree.afficherBonsEntree();
+    gestionBonEntree.afficherBonsEntree();
     for (var bon in gestionBonSortie.listerBonsSortie()) {
     print(bon);
     }
@@ -193,16 +195,16 @@ void main (){
           rechercherBonSortie(gestionBonSortie);
           continue;
         case "19":
-          ajouterProduit();
+          ajouterBonEntree(gestionBonEntree);
           continue;
         case "20":
-          modifierProduit();
+          modifierBonEntree(gestionBonEntree);
           continue;
         case "21":
-          supprimerProduit();
+          supprimerBonEntree(gestionBonEntree);
           continue;
         case "22":
-          rechercherProduit();
+          rechercherBonEntree(gestionBonEntree);
           continue;
         case "23":
           detailsEntree.creerDetailsEntree();
@@ -357,16 +359,16 @@ void main (){
           rechercherBonSortie(gestionBonSortie);
           continue;
         case "19":
-          ajouterProduit();
+          ajouterBonEntree(gestionBonEntree);
           continue;
         case "20":
-          modifierProduit();
+          modifierBonEntree(gestionBonEntree);
           continue;
         case "21":
-          supprimerProduit();
+          supprimerBonEntree(gestionBonEntree);
           continue;
         case "22":
-          rechercherProduit();
+          rechercherBonEntree(gestionBonEntree);
           continue;
         case "23":
           detailsEntree.creerDetailsEntree();
@@ -667,7 +669,57 @@ void rechercherutilisateurParNom(GestionUtilisateurs gestionUtilisateurs) {
 }
 
 /***********************************************************Bon d'entrée******************************************************************/
+void ajouterBonEntree(GestionBonEntree gestionnaire) {
+  print("Entrez les informations du bon d'entrée à ajouter:");
+  print("Entrez la date de commande (format: YYYY-MM-DD):");
+  String dateDeCommande = stdin.readLineSync() ?? "";
+  print("Entrez le Statut:");
+  String statut = stdin.readLineSync() ?? "";
+  print("Entrez l'ID de l'utilisateur:");
+  int utilisateurId = int.parse(stdin.readLineSync() ?? "0");
+  print("Entrez l'ID du fournisseur:");
+  int fournisseurId = int.parse(stdin.readLineSync() ?? "0");
 
+  gestionnaire.ajouterBonEntree(dateDeCommande, statut, utilisateurId, fournisseurId);
+  print("Bon d'entrée ajouté avec succès !");
+}
+
+void modifierBonEntree(GestionBonEntree gestionnaire) {
+  print("Entrez l'ID du bon d'entrée à modifier:");
+  int bonEntreeId = int.parse(stdin.readLineSync() ?? "0");
+  print("Entrez les nouvelles informations pour le bon d'entrée:");
+  print("Date de commande (format: YYYY-MM-DD):");
+  String dateDeCommande = stdin.readLineSync() ?? "";
+  print("Statut:");
+  String statut = stdin.readLineSync() ?? "";
+  print("ID de l'utilisateur:");
+  int utilisateurId = int.parse(stdin.readLineSync() ?? "0");
+  print("ID du fournisseur:");
+  int fournisseurId = int.parse(stdin.readLineSync() ?? "0");
+
+  gestionnaire.modifierBonEntree(bonEntreeId, dateDeCommande: dateDeCommande, statut: statut, utilisateurId: utilisateurId, fournisseurId: fournisseurId);
+  print("Bon d'entrée modifié avec succès !");
+}
+
+void supprimerBonEntree(GestionBonEntree gestionnaire) {
+  print("Entrez l'ID du bon d'entrée à supprimer:");
+  int bonEntreeId = int.parse(stdin.readLineSync() ?? "0");
+
+  gestionnaire.supprimerBonEntree(bonEntreeId);
+  print("Bon d'entrée supprimé avec succès !");
+}
+
+void rechercherBonEntree(GestionBonEntree gestionnaire) {
+  print("Entrez l'ID du bon d'entrée à rechercher:");
+  int bonEntreeId = int.parse(stdin.readLineSync() ?? "0");
+
+  try {
+    BonEntree bon = gestionnaire.rechercherBonEntreeParId(bonEntreeId);
+    print('Bon trouvé : $bon');
+  } catch (e) {
+    print(e);
+  }
+}
 
 /***********************************************************Bon de sortie*****************************************************************/
 void ajouterBonSortie(GestionBonSortie gestionBonSortie) {
