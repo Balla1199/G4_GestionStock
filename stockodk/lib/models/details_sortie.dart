@@ -35,7 +35,6 @@ class GestionDetailsSortie {
       produitId: produitId,
     );
     _details.add(newDetail);
-    print('Détail de sortie ajouté avec succès: $newDetail');
   }
 
   List<DetailsSortie> listerDetailsSortie() {
@@ -71,30 +70,3 @@ class GestionDetailsSortie {
     return _details.where((detail) => detail.dateExpiration != null && detail.dateExpiration!.isAtSameMomentAs(dateRecherche)).toList();
   }
 }
-
-
-/*
-void main() {
-  var gestion = GestionDetailsSortie();
-  gestion.ajouterDetailSortie(5, 1500.0, null, 1, 1);
-  print(gestion.listerDetailsSortie());
-  gestion.modifierDetailSortie(1, quantite: 10, prixTotal: 3000.0);
-  print(gestion.listerDetailsSortie());
-  gestion.supprimerDetailSortie(1);
-  print(gestion.listerDetailsSortie());
-
-  var gestion2 = GestionDetailsSortie();
-  gestion2.ajouterDetailSortie(5, 1500.0, DateTime.parse('2024-10-01'), 1, 1);
-  gestion2.ajouterDetailSortie(10, 3000.0, DateTime.parse('2024-10-01'), 2, 2);
-
-  try {
-    var detail = gestion2.rechercherParId(1);
-    print('Recherche par ID: $detail');
-  } catch (e) {
-    print(e);
-  }
-
-  var detailsParDate = gestion2.rechercherParDateExpiration(DateTime.parse('2024-10-01'));
-  print('Recherche par date d\'expiration: $detailsParDate');
-}
-*/
