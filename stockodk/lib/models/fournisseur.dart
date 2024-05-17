@@ -17,52 +17,41 @@ List<Fournisseur> fournisseurs = [];
 class GestionFournisseurs {
   List<Fournisseur> fournisseurs = []; // Liste de fournisseurs
 
-  void ajouterFournisseur(Fournisseur nouveauFournisseur) {
-    fournisseurs.add(nouveauFournisseur);
-    
+     void ajouterFournisseur(Fournisseur fournisseur) {
+    fournisseurs.add(fournisseur);
   }
-
+  
   //aficher
   void afficherFournisseur() {
-    for (var fournisseur in fournisseurs) {
-      print(
-          " ID: ${fournisseur.fournisseurId}, Nom: ${fournisseur.nom}, Adresse: ${fournisseur.adresse}, telephone: ${fournisseur.telephone}");
-    }
+    fournisseurs.forEach((f) {
+      print('ID: ${f.fournisseurId}, Nom: ${f.nom}, Adresse: ${f.adresse}, Téléphone: ${f.telephone}');
+    });
   }
   // Autres méthodes pour gérer les fournisseurs...
 
-  modifierFournisseur(int fournisseurId, String nouveauNom,
-      String nouvelleAdresse, String nouveauTelephone) {
+  modifierFournisseur(int Id, String nouveauNom, String nouvelleAdresse, String nouveauTelephone) {
     var fournisseur = fournisseurs.firstWhere(
-        (f) => f.fournisseurId == fournisseurId,
-        orElse: () => Fournisseur(
-            fournisseurId: fournisseurId,
+        (f) => f.fournisseurId == Id, orElse: () => Fournisseur(
+            fournisseurId: Id,
             nom: "",
             adresse: "",
-            telephone:
-                "")); // Utilisez un fournisseur par défaut ou lancez une exception si nécessaire
+            telephone: "")); // Utilisez un fournisseur par défaut ou lancez une exception si nécessaire
     fournisseur.nom = nouveauNom;
     fournisseur.adresse = nouvelleAdresse;
     fournisseur.telephone = nouveauTelephone;
-    print(
-        'Mis à jour Fournisseur: ${fournisseur.nom}, ${fournisseur.adresse}, ${fournisseur.telephone}');
+    print('Fournisseur modifié: ID=$Id, Nom=$nouveauNom, Adresse=$nouvelleAdresse, Téléphone=$nouveauTelephone');
   }
-
-  void ListeDesFournisseurAfterModify(Fournisseur nouveauFournisseur) {
-    fournisseurs.add(nouveauFournisseur);
-    print(
-        'Liste des fournisseurs après modification : ${nouveauFournisseur.nom}, ${nouveauFournisseur.adresse},  ${nouveauFournisseur.telephone}');
-  }
-
-  void supprimerFournisseur(int fournisseurId) {
-    fournisseurs.removeWhere((f) => f.fournisseurId == fournisseurId);
-    print("Suppression effectue avec succes ");
-   
-  }
-
-  List<Fournisseur> rechercherFournisseursParNom(String nom) {
-    return fournisseurs.where((fournisseur) => fournisseur.nom == nom).toList();
-  }
-
   
+  void supprimerFournisseur(int id) {
+    fournisseurs.removeWhere((f) => f.fournisseurId == id);
+    print('Fournisseur supprimé: ID=$id');
+  }
+
+  Fournisseur? rechercherFournisseurParNom(String nom) {
+    try {
+      return fournisseurs.firstWhere((f) => f.nom.toLowerCase() == nom.toLowerCase());
+    } catch (e) {
+      return null; // Fournisseur non trouvé
+    }
+  }
 }

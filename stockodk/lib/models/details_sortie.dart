@@ -35,7 +35,6 @@ class GestionDetailsSortie {
       produitId: produitId,
     );
     _details.add(newDetail);
-    print('Détail de sortie ajouté avec succès: $newDetail');
   }
 
   List<DetailsSortie> listerDetailsSortie() {

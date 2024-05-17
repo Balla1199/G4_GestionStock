@@ -11,6 +11,16 @@ class DetailsEntree {
 
   static List<DetailsEntree> _detailsEntrees = [];
 
+  void afficherTousLesDetailsEntree() {
+    if (_detailsEntrees.isEmpty) {
+      print("Aucun détail d'entrée disponible.");
+    } else {
+      for (var detailsEntree in _detailsEntrees) {
+        print("ID: ${detailsEntree.id}, Quantité: ${detailsEntree.quant}, Prix Total: ${detailsEntree.prixtotal}, ID du Produit: ${detailsEntree.idprod}, ID du Bon d'Entrée: ${detailsEntree.idbonentree}");
+      }
+    }
+  }
+
   void creerDetailsEntree() {
     print("Entrez l'ID :");
     id = int.parse(stdin.readLineSync()!);
