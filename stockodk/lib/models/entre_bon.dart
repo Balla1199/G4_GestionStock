@@ -1,25 +1,9 @@
 import 'dart:io';
 
 import 'package:stockodk/models/fournisseur.dart';
-import 'package:stockodk/models/utilisateur.dart';
 
-class BonEntree {
-  int bonEntreeId;
-  String dateDeCommande;
-  String statut;
-  Utilisateur nomUtilisateur;
-  Fournisseur nom;
-
-  BonEntree(this.bonEntreeId, this.dateDeCommande, this.statut,
-      this.nomUtilisateur, this.nom);
-
-  @override
-  String toString() {
-    return 'BonEntree{id: $bonEntreeId, dateDeCommande: $dateDeCommande, statut: $statut, utilisateurNom: $nomUtilisateur, fournisseur du Fournisseur: $nom }';
-  }
-}
-
-List<Utilisateur> utilisateurs = [];
+import 'utilisateur.dart';
+import 'bon_entree.dart';
 
 class EntreBon {
 // Méthode d'ajout des utilisateurs
@@ -165,16 +149,15 @@ class EntreBon {
 
   void afficherListeUtilisateurs(List<Utilisateur> utilisateurs) {
     print('Liste des utilisateurs :');
-    for (var user in utilisateurs) {
+    utilisateurs.forEach((user) {
       print('${user.utilisateurId}: ${user.nomUtilisateur}');
-    }
+    });
   }
 
 //BonEntre
   List<BonEntree> bonEntreeList = [];
-
-  void ajouterBonEntree(
-      List<Utilisateur> utilisateurs, List<Fournisseur> tousLesFournisseurs) {
+  var gestFourni = Fournisseur();
+  void ajouterBonEntree(List<Utilisateur> utilisateurs) {
     // Demander à l'utilisateur de saisir les informations pour la nouvelle BonEntre
     print('Veuillez saisir les informations pour la nouvelle BonEntre :');
     print('ID de la BonEntre :');
@@ -195,26 +178,28 @@ class EntreBon {
       return;
     }
     print('ID du fournisseur :');
-    afficherFournisseur(tousLesFournisseurs);
-    var nom = stdin.readLineSync()!;
-    var fournisseurExist = fournisseursList.any((fourni) => fourni.nom == nom);
-    if (!fournisseurExist) {
-      print("Erreur le nom du fournisseur saisi n'esxite dans la liste.");
-      return;
-    }
+    var fournisseurId = int.parse(stdin.readLineSync()!);
+
     // Récupérer l'utilisateur correspondant au nom saisi
     var utilisateur = utilisateurs
         .firstWhere((user) => user.nomUtilisateur == nomUtilisateur);
-    var fournisseur =
-        tousLesFournisseurs.firstWhere((fourni) => fourni.nom == nom);
+
     // Créer la BonEntre avec les informations saisies
     var nouvelleBonEntree = BonEntree(
-        bonEntreeId, dateDeCommande, statut, utilisateur, fournisseur);
+        bonEntreeId, dateDeCommande, statut, utilisateur, fournisseurId);
 
     // Ajouter la BonEntre à la liste des bons d'entrée
     bonEntreeList.add(nouvelleBonEntree);
 
     print('La BonEntre a été ajoutée avec succès.');
+    // Ajout du bon d'entrée
+    // _BonEntree.add(this);
+    // var nouveauBonEntree = BonEntree(
+    //     _nextId++,
+    //     dateDeCommande,
+    //     statut,
+    //     utilisateur;
+    // _bonEntreeList.add(nouveauBonEntree);
   }
 
   // void afficherBonsEntree() {
